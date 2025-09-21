@@ -2,12 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\DeskController;
+use App\Http\Controllers\Api\V1\DeskController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::resources([
-    'desks' => DeskController::class,
-]);
+Route::prefix('v1')->group(function () {
+    Route::resources([
+        'desks' => DeskController::class,
+    ]);
+});
